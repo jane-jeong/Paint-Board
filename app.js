@@ -5,13 +5,13 @@ const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 const saveBtn = document.getElementById("jsSave"); 
 
-// context의 default 설정 
+//-------------------context의 default 설정 ------------------
 ctx.fillStyle = '#FFFFFF';
 ctx.fillRect(0, 0, 700, 700);
-
 ctx.strokeStyle = '#2C2C2C';
 ctx.lineWidth = 2;
 
+//------------------------1. Draw line------------------------
 let painting = false; 
 
 // stopPainting
@@ -24,10 +24,12 @@ function startPainting() {
     painting = true; 
 }
 
-// function onMouseMove는 마우스가 움직일 때의 event를 console.log하는 fuction
-// offsetX, offsetY : 캔버스 내의 좌표
-// clientX, clientY : 전체 브라우저 내의 좌표 
-// 알고 싶은 것은 offsetX, offsetY이기 때문에 function onMouseMove에서 offsetX, offsetY 값만 가져올 것
+/*
+function onMouseMove는 마우스가 움직일 때의 event를 console.log하는 fuction
+* offsetX, offsetY : 캔버스 내의 좌표
+* clientX, clientY : 전체 브라우저 내의 좌표 
+알고 싶은 것은 offsetX, offsetY이기 때문에 function onMouseMove에서 offsetX, offsetY 값만 가져올 것
+*/
 function onMouseMove(event) {
     const x = event.offsetX;
     const y = event.offsetY; 
@@ -39,7 +41,6 @@ function onMouseMove(event) {
         console.log("⚫ mousemove이고 mousedown / creating line in", x,y)
         ctx.lineTo(x,y); 
         ctx.stroke();
-        // ctx.closePath();  <- 실험적임 
     }
 }
 
@@ -64,12 +65,7 @@ if(canvas) {
 }
 
 
-// # 컬러 바꿔주기는 ctx.strokestyles의 값을 바꿔줄 것. 
-// if controls_color #2c2c2c인 요소를 클릭(mousedown)하면 
-// ctx.strokestyles의 값을 "#2c2c2c"; 로 반영한다 
-
-// if controls_color #ffffff인 요소를 클릭(mousedown)하면 
-// ctx.strokestyles의 값을 "#ffffff"; 로 반영한다 
+//------------------------Change Color------------------------
 
 function handleColorClick(event) {
     const color = event.target.style.backgroundColor;
@@ -82,8 +78,7 @@ Array.from(colors).forEach(potatowhatever =>
     potatowhatever.addEventListener("click", handleColorClick)) 
 
 
-// # stroke 사이즈 바꿔주는 건 ctx.linewidth의 값을 바꿔줄 것 
-// range 슬라이더를 이용해서 슬라이더 값을 받아서 ctx.linewidth의 값을 재설정한다 
+//---------------------Change Stroke-size---------------------
 
 function HandleRangeChange(event) {
     const size = Number(event.target.value) ; 
@@ -95,7 +90,7 @@ if(range) {
     range.addEventListener("input", HandleRangeChange)
 }
 
-// background-color 바꾸기 
+//-------------------Change Background-Color-------------------
 let filling = false; //default : false
 
 function handleModeClick() {
@@ -113,7 +108,7 @@ if(mode) {
 }
 
 
-//-----------------------bug-------------------------
+//-----------------------Save Image----------------------- *bug*
 function HandleSaveClick(event) {
     let image = canvas.toDataURL("image/jpeg"); 
     let link = document.createElement('a');
@@ -125,12 +120,3 @@ function HandleSaveClick(event) {
 if(saveBtn) {
     saveBtn.addEventListener("click", HandleSaveClick)
 }
-
-
-/*
-    const reimage = '<iframe src="' + image  + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" ></iframe>'
-    const link = document.createElement('a');
-    link.href = reimage; 
-    link.downlaod = 'PaintJS'; 
-    link.click();
-*/
