@@ -45,7 +45,7 @@ function onMouseMove(event) {
 
 function handleCanvasClick() {
     if(filling) {
-        ctx.fillRect(0, 0, 700, 700); // (x, y, width, height) 
+        ctx.fillRect(0, 0, 650, 650); // (x, y, width, height) 
     }
 }
 
