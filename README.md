@@ -24,7 +24,7 @@
 - Save Image 
 
 ## Next tasks will be...
-- Undo, Redo 
+- Undo, Redo (using '.save(), .restore())
 - Reset 
 - Resposive(flexible) layout 
 
