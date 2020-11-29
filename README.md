@@ -15,6 +15,7 @@
 
 ## It has
 - Draw line 
+- Change Stroke size using slider
 - Change line color
 - Change background(fill) color
 - Save Image 
